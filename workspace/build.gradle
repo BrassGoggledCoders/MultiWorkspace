@@ -115,6 +115,7 @@ dependencies {
 
     compile project(':Titanium')
     compile project(':Workshop')
+    compile project(':Transport')
 }
 
 jar {
