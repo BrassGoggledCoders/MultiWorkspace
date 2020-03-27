@@ -36,18 +36,8 @@ archivesBaseName = 'modid'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
     mappings channel: 'snapshot', version: "${mappings_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
-    // accessTransformer = file('build/resources/main/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
@@ -59,17 +49,14 @@ minecraft {
                 Workshop {
                     source project(':Workshop').sourceSets.main
                 }
+                Transport {
+                    source project(':Transport').sourceSets.main
+                }
             }
         }
 
         server {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            // property 'forge.logging.console.level', 'debug'
 
             mods {
                 Titanium {
@@ -77,6 +64,9 @@ minecraft {
                 }
                 Workshop {
                     source project(':Workshop').sourceSets.main
+                }
+                Transport {
+                    source project(':Transport').sourceSets.main
                 }
             }
         }
@@ -84,19 +74,15 @@ minecraft {
         data {
             workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
-            // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            // property 'forge.logging.console.level', 'debug'
-            args '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
-
             mods {
                 Titanium {
                     source project(':Titanium').sourceSets.main
                 }
                 Workshop {
                     source project(':Workshop').sourceSets.main
+                }
+                Transport {
+                    source project(':Transport').sourceSets.main
                 }
             }
         }
