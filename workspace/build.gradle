@@ -52,6 +52,9 @@ minecraft {
                 Transport {
                     source project(':Transport').sourceSets.main
                 }
+                Floralchemy {
+                    source project(':Floralchemy').sourceSets.main
+                }
             }
         }
 
@@ -67,6 +70,9 @@ minecraft {
                 }
                 Transport {
                     source project(':Transport').sourceSets.main
+                }
+                Floralchemy {
+                    source project(':Floralchemy').sourceSets.main
                 }
             }
         }
@@ -84,15 +90,15 @@ minecraft {
                 Transport {
                     source project(':Transport').sourceSets.main
                 }
+                Floralchemy {
+                    source project(':Floralchemy').sourceSets.main
+                }
             }
         }
     }
 }
 
 dependencies {
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     //compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
@@ -102,18 +108,5 @@ dependencies {
     compile project(':Titanium')
     compile project(':Workshop')
     compile project(':Transport')
-}
-
-jar {
-    manifest {
-        attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
+    compile project(':Floralchemy')
 }
