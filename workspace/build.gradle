@@ -1,9 +1,6 @@
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        maven { url = "https://files.minecraftforge.net/maven" }
         jcenter()
         mavenCentral()
     }
@@ -12,26 +9,10 @@ buildscript {
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-repositories {
-    maven {
-        url 'https://cdn.hrzn.studio/maven/'
-    }
-    maven { // JEI
-        url "https://dvs1.progwml6.com/files/maven"
-    }
-    maven { // Patchouli
-        url "https://maven.blamejared.com"
-    }
-}
-
-version = '1.0'
-group = 'com.yourname.modid' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'modid'
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: "maven"
+apply plugin: "java"
+apply plugin: "idea"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -98,12 +79,28 @@ minecraft {
     }
 }
 
+repositories {
+    maven {
+        url "https://cdn.hrzn.studio/maven/"
+    }
+    maven { // JEI
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven { // Patchouli
+        url 'https://maven.blamejared.com'
+    }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    //compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    //runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
     compile fg.deobf("vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}")
+    compile fg.deobf("mezz.jei:jei-${jei_version}")
 
     compile project(':Titanium')
     compile project(':Workshop')
